@@ -87,6 +87,135 @@ El desarrollo cumple con los controles relevantes de ISO 27001:2022 (Anexo A).
 | **INTERNO** | Perfiles de usuario, metadata de fotos, álbumes | Acceso autenticado. Validación de permisos. |
 | **PÚBLICO** | Portafolios públicos, thumbnails públicos, perfiles públicos | Acceso sin autenticación. Cache en CDN. |
 
+## Git Flow — NON-NEGOTIABLE
+
+### Branches Permanentes
+
+| Branch | Propósito | Protección |
+|--------|-----------|------------|
+| `main` | Producción. Código estable y desplegado. | PR + 1 aprobación obligatoria. No push directo. No force push. |
+| `development` | Integración. Branch por defecto en GitHub. | PR + 1 aprobación obligatoria. No push directo. No force push. |
+
+### Branches Temporales
+
+| Tipo | Naming Convention | Se crea desde | Se mergea a | Ejemplo |
+|------|-------------------|---------------|-------------|---------|
+| Feature | `feature/<id>-<descripcion>` | `development` | `development` | `feature/F-04-anti-descarga` |
+| Bugfix | `bugfix/<id>-<descripcion>` | `development` | `development` | `bugfix/BUG-12-fix-upload` |
+| Hotfix | `hotfix/<id>-<descripcion>` | `main` | `main` + `development` | `hotfix/HOT-01-fix-auth-crash` |
+| Release | `release/<version>` | `development` | `main` + `development` | `release/1.0.0` |
+
+### Flujo de Trabajo
+
+```
+feature/* ──PR──► development ──PR (release)──► main
+bugfix/*  ──PR──► development                     ▲
+hotfix/*  ──────────────────────────────PR──────────┘
+                                        └──PR──► development
+```
+
+### Buenas Prácticas para Pull Requests
+
+#### Antes de crear el PR
+1. Asegurar que la branch está actualizada con su rama base (`git pull origin development`).
+2. Resolver conflictos localmente antes de abrir el PR.
+3. Todos los tests deben pasar localmente (`unit` + `integration`).
+4. Ejecutar linter y formateo.
+5. Revisar el diff propio antes de abrir el PR (auto-review).
+
+#### Estructura del PR
+
+```markdown
+## Título
+<tipo>(<alcance>): <descripción concisa>
+
+Tipos: feat, fix, docs, style, refactor, test, chore, hotfix
+Ejemplo: feat(photos): add anti-download protection for image viewer
+```
+
+```markdown
+## Cuerpo del PR (template obligatorio)
+
+### Descripción
+Resumen claro de qué cambia y por qué.
+
+### Spec relacionada
+Link a la spec en `.specify/` que respalda este cambio.
+
+### Tipo de cambio
+- [ ] Feature nueva (cambio no-breaking que agrega funcionalidad)
+- [ ] Bug fix (cambio no-breaking que corrige un issue)
+- [ ] Breaking change (cambio que alteraría funcionalidad existente)
+- [ ] Hotfix (corrección urgente en producción)
+- [ ] Refactor (cambio de código sin alterar comportamiento)
+- [ ] Docs (solo documentación)
+
+### Checklist de calidad
+- [ ] Tests escritos y pasando (TDD: tests primero)
+- [ ] Cobertura no disminuyó
+- [ ] Sin warnings de linter
+- [ ] Revisión OWASP completada (para features con input de usuario, auth, o datos sensibles)
+- [ ] Datos sensibles clasificados según la tabla de Data Classification
+- [ ] Documentación actualizada si aplica
+
+### Checklist de seguridad (si aplica)
+- [ ] Input validado y sanitizado
+- [ ] Queries parametrizadas (no concatenación)
+- [ ] Permisos verificados en endpoints
+- [ ] No hay secrets hardcodeados
+- [ ] URLs firmadas con expiración para recursos S3
+
+### Screenshots / Evidencia
+(Si aplica, capturas de la funcionalidad o output de tests)
+```
+
+#### Durante la revisión
+- El reviewer verifica cumplimiento con la constitución (SDD, TDD, OWASP, ISO 27001).
+- Comentarios constructivos y específicos (referenciar línea de código).
+- Bloquear merge si hay vulnerabilidades de seguridad o tests faltantes.
+- Resolver TODOS los threads de conversación antes de aprobar.
+
+#### Después del merge
+- Eliminar la branch temporal (automático en GitHub si está configurado).
+- Verificar que el CI/CD pasa en la rama destino.
+- Actualizar la tarjeta de Trello correspondiente.
+
+### Commits Convencionales
+
+Formato obligatorio para mensajes de commit:
+
+```
+<tipo>(<alcance>): <descripción>
+
+[cuerpo opcional]
+
+[footer opcional]
+```
+
+| Tipo | Uso |
+|------|-----|
+| `feat` | Nueva funcionalidad |
+| `fix` | Corrección de bug |
+| `docs` | Solo documentación |
+| `style` | Formateo, punto y coma faltante (no cambia lógica) |
+| `refactor` | Refactorización sin cambiar comportamiento |
+| `test` | Agregar o corregir tests |
+| `chore` | Mantenimiento, dependencias, configuración |
+| `hotfix` | Corrección urgente de producción |
+| `security` | Corrección de vulnerabilidad de seguridad |
+
+Ejemplo:
+```
+feat(restrictions): add password protection for albums
+
+Albums can now be protected with a password. Visitors must
+enter the correct password before viewing album contents.
+
+Spec: .specify/specs/RF-04-restrictions.md
+OWASP: A02 - password hashed with bcrypt before storage
+Closes #42
+```
+
 ## Governance
 
 - Esta constitución es el documento rector del proyecto y **supersede cualquier otra práctica**.
@@ -94,4 +223,4 @@ El desarrollo cumple con los controles relevantes de ISO 27001:2022 (Anexo A).
 - Todo PR/review debe verificar cumplimiento con esta constitución.
 - Las excepciones a los principios NON-NEGOTIABLE requieren documentación explícita y aprobación.
 
-**Version**: 1.0.0 | **Ratified**: 2026-03-12 | **Last Amended**: 2026-03-12
+**Version**: 1.1.0 | **Ratified**: 2026-03-12 | **Last Amended**: 2026-03-12
