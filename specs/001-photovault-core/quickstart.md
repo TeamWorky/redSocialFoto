@@ -45,11 +45,11 @@ npm run migration:run
 npm run start:dev
 
 # Or individually
-npm run start:dev:gateway
-npm run start:dev:auth
-npm run start:dev:photos
-npm run start:dev:social
-npm run start:dev:billing
+npm run start:dev api-gateway
+npm run start:dev auth-service
+npm run start:dev photos-service
+npm run start:dev social-service
+npm run start:dev billing-service
 ```
 
 ### 6. Start frontend

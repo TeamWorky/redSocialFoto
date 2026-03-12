@@ -64,7 +64,7 @@
 | Field | Type | Constraints | Notes |
 |-------|------|-------------|-------|
 | id | UUID | PK, auto-generated | |
-| photographerId | UUID | FK → Photographer, NOT NULL | Owner |
+| photographerId | UUID | NOT NULL | Referencia lógica a auth.Photographer (sin FK cross-schema, validado a nivel de aplicación) |
 | title | varchar(100) | NULL | |
 | description | text | NULL, max 1000 chars | |
 | tags | varchar(50)[] | NULL, max 20 | Array de tags |
@@ -91,7 +91,7 @@
 | Field | Type | Constraints | Notes |
 |-------|------|-------------|-------|
 | id | UUID | PK, auto-generated | |
-| photographerId | UUID | FK → Photographer, NOT NULL | Owner |
+| photographerId | UUID | NOT NULL | Referencia lógica a auth.Photographer (sin FK cross-schema, validado a nivel de aplicación) |
 | name | varchar(100) | NOT NULL | |
 | description | text | NULL, max 500 chars | |
 | visibility | enum | NOT NULL, DEFAULT 'private' | 'public', 'private' |

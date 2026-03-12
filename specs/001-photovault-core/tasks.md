@@ -316,6 +316,9 @@ Task: T074 "Integration test for presigned URL upload flow"
 Task: T075 "Create Photo entity"
 Task: T076 "Create photo DTOs (UploadUrlRequest/Response, ConfirmUpload)"
 
+# Then migration (depends on entity):
+Task: T077 "Create migration for photos schema"
+
 # Then sequential implementation:
 Task: T078 "Implement StorageClientService" (presigned PUT/GET, forcePathStyle)
 Task: T079 "Async file validation in worker"

@@ -202,7 +202,7 @@ Request presigned PUT URLs for direct upload to S3/MinIO.
 **Request**:
 ```json
 {
-  "files": [
+  "files": [  // max 20 items per batch (StoragePlan.maxBatchUpload)
     {
       "filename": "string (required)",
       "contentType": "string (required, image/jpeg | image/png | image/webp)",
