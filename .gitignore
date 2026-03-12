@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+build/
+.next/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code credentials
+.claude/settings.json
+
+# Logs
+logs/
+*.log
+
+# Coverage
+coverage/
+
+# Temp
+tmp/
+temp/
