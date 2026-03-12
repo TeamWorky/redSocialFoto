@@ -58,10 +58,10 @@
              │  (3001)    ││  (3002)    ││  (3003)    ││  (3004)    │
              └──┬───┬─────┘└──┬───┬─────┘└──┬───┬─────┘└──┬───┬─────┘
                 │   │         │   │         │   │         │   │
-                │   │ Redis   │   │ Redis   │   │ Redis   │   │
-                │   └────────►├───┘◄────────┤───┘◄────────┤   │
-                │   Transport │  (pub/sub + │  request/   │   │
-                │             │   events)   │  response   │   │
+                │   │         │   │  Redis  │   │         │   │
+                │   └─────────┤───┼─────────┤───┼─────────┤   │
+                │   Transport │   │(pub/sub │   │request/ │   │
+                │  (bidirect.)│   │+ events)│   │response │   │
               ┌─┴───────┐  ┌─┴───────┐   ┌─┴───────┐  ┌─┴───────┐
               │schema:  │  │schema:  │   │schema:  │  │schema:  │
               │auth     │  │photos   │   │social   │  │billing  │

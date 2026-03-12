@@ -208,7 +208,7 @@ Formato obligatorio para mensajes de commit:
 
 Ejemplo:
 ```
-feat(restrictions): add password protection for albums
+feat(restrictions): RF-04 - add password protection for albums
 
 Albums can now be protected with a password. Visitors must
 enter the correct password before viewing album contents.

@@ -41,10 +41,7 @@ npm run migration:run
 ### 5. Start services
 
 ```bash
-# All services at once
-npm run start:dev
-
-# Or individually
+# Start each service individually (separate terminals)
 npm run start:dev api-gateway
 npm run start:dev auth-service
 npm run start:dev photos-service
