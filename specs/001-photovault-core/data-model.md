@@ -36,7 +36,7 @@
 | email | varchar(255) | UNIQUE, NOT NULL | Cifrado clasificación RESTRINGIDO |
 | passwordHash | varchar(255) | NULL (OAuth users) | bcrypt/argon2. Clasificación RESTRINGIDO |
 | displayName | varchar(100) | NOT NULL | |
-| username | varchar(30) | UNIQUE, NOT NULL | Slug del portafolio. 3-30 chars, alfanumérico + guiones |
+| username | varchar(30) | UNIQUE, NULL | Slug del portafolio. Se configura en US3 (Portfolio). 3-30 chars, alfanumérico + guiones |
 | bio | text | NULL, max 500 chars | |
 | profilePictureUrl | varchar(500) | NULL | URL a S3 optimized |
 | socialLinks | jsonb | NULL | Array de {platform, url}, max 5 |

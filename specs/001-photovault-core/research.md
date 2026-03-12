@@ -133,7 +133,14 @@
 - **Alternatives considered**:
   - Migraciones por servicio: Complejidad de coordinación en CI/CD y rollback.
 
-### D-15: Observability
+### D-15: OWASP Threat Model
+
+- **Decision**: Modelo de amenazas con 21 vectores de ataque identificados y mitigaciones específicas
+- **Rationale**: Identificar y mitigar amenazas antes de la implementación. Cada vector mapeado a componente y control específico. Cubre A01 a A10 de OWASP Top 10. Clasificación de datos según ISO 27001 (CONFIDENCIAL, RESTRINGIDO, INTERNO, PÚBLICO).
+- **Alternatives considered**:
+  - Threat model post-implementación: Demasiado tarde para cambios arquitectónicos.
+
+### D-16: Observability
 
 - **Decision**: OpenTelemetry SDK + nestjs-otel + Jaeger (dev)
 - **Rationale**: Auto-instrumentación para HTTP, pg, ioredis, TypeORM, BullMQ. nestjs-otel para decoradores @Span(). W3C traceparent propaga traceId entre servicios. SDK DEBE inicializarse ANTES de NestFactory.create(). ParentBasedSampler 10% en producción.
@@ -141,7 +148,7 @@
   - Solo Winston + RequestId: Insuficiente para tracing distribuido entre 5 procesos.
   - DataDog agent: Vendor lock-in, costo a escala.
 
-### D-16: Frontend State Management
+### D-17: Frontend State Management
 
 - **Decision**: Angular Signals + Services singleton (sin NgRx para MVP)
 - **Rationale**: Angular 21 Signals proveen reactividad nativa suficiente. NgRx agrega complejidad significativa para MVP. Services singleton con signal() cubren: auth, upload progress, photo cache, storage. Migrable a NgRx si la complejidad crece.
@@ -149,14 +156,14 @@
   - NgRx: Over-engineering para MVP. Actions/reducers/effects/selectors innecesarios.
   - Akita: Menor adopción que NgRx, mismo problema de complejidad.
 
-### D-17: Contract Testing
+### D-18: Contract Testing
 
 - **Decision**: Contract types compartidos en libs/common/contracts/ + integration tests
 - **Rationale**: Monorepo permite compartir tipos TypeScript entre servicios. Los contract types validan en compilación. Integration tests validan runtime. Sin Pact broker (complejidad de infraestructura).
 - **Alternatives considered**:
   - Pact: Broker + CI flow complejo. Innecesario con monorepo y tipos compartidos.
 
-### D-18: Rate Limiting
+### D-19: Rate Limiting
 
 - **Decision**: @nestjs/throttler con Redis storage (ThrottlerStorageRedisService)
 - **Rationale**: Rate limiting distribuido por IP + usuario autenticado. Redis comparte contadores entre instancias del gateway. Login: 5/min por email+IP. API: 100/min por usuario, 30/min anónimo. Upload URL: 20/5min.

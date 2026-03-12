@@ -109,9 +109,9 @@ El desarrollo cumple con los controles relevantes de ISO 27001:2022 (Anexo A).
 
 ```
 feature/* ──PR──► development ──PR (release)──► main
-bugfix/*  ──PR──► development                     ▲
-hotfix/*  ──────────────────────────────PR──────────┘
-                                        └──PR──► development
+bugfix/*  ──PR──► development
+hotfix/*  ──PR──► main
+   └─────PR──► development
 ```
 
 ### Buenas Prácticas para Pull Requests

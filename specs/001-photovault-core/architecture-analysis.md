@@ -248,7 +248,7 @@ database/
 | TM-03 | A02 Cryptographic Failures | Passwords almacenados en texto plano o hash débil | auth-service | bcrypt con salt rounds ≥ 12 (o argon2id) | CRÍTICA |
 | TM-04 | A02 Cryptographic Failures | JWT secret débil o hardcodeado | auth-service | Secret de env variable, min 256 bits, rotación planificada | CRÍTICA |
 | TM-05 | A03 Injection | SQL injection via búsqueda de fotos/tags | photos-service | TypeORM parametrizado. NUNCA concatenar queries. GIN index con parámetros | ALTA |
-| TM-06 | A03 Injection | XSS via título/descripción/comentarios | social-service, photos-service | Sanitizar HTML en input (class-validator + class-transformer). CSP headers | ALTA |
+| TM-06 | A03 Injection | XSS via título/descripción/comentarios | social-service, photos-service | Validación de estructura con class-validator. Sanitización HTML con sanitize-html (server-side). CSP headers. No renderizar HTML raw en frontend | ALTA |
 | TM-07 | A04 Insecure Design | SSRF via URL de imagen o social link | auth-service (socialLinks) | Validar URLs con allowlist de protocolos (https only). No hacer fetch server-side de URLs de usuario | ALTA |
 | TM-08 | A04 Insecure Design | Path traversal en S3 object keys | photos-service | Keys generados server-side como UUID. Validar que key no contiene `..` o `/` | ALTA |
 | TM-09 | A05 Security Misconfiguration | Headers de seguridad faltantes | api-gateway | Helmet (CSP, HSTS, X-Frame-Options, X-Content-Type-Options). CORS whitelist | MEDIA |
