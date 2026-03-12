@@ -26,7 +26,8 @@ Register a new photographer account.
   "email": "string",
   "displayName": "string",
   "username": "string | null",
-  "accessToken": "string (JWT, 15 min)",
+  "emailVerified": false,
+  "accessToken": "string (JWT, 15 min — restricted access until email verified)",
   "refreshToken": "string (7 days)",
   "message": "Verification email sent"
 }

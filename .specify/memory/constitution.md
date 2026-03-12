@@ -100,9 +100,9 @@ El desarrollo cumple con los controles relevantes de ISO 27001:2022 (Anexo A).
 
 | Tipo | Naming Convention | Se crea desde | Se mergea a | Ejemplo |
 |------|-------------------|---------------|-------------|---------|
-| Feature | `feature/<id>-<descripcion>` | `development` | `development` | `feature/F-04-anti-descarga` |
-| Bugfix | `bugfix/<id>-<descripcion>` | `development` | `development` | `bugfix/BUG-12-fix-upload` |
-| Hotfix | `hotfix/<id>-<descripcion>` | `main` | `main` + `development` | `hotfix/HOT-01-fix-auth-crash` |
+| Feature | `feature/F-<id>-<descripcion>` | `development` | `development` | `feature/F-04-anti-descarga` |
+| Bugfix | `bugfix/BUG-<id>-<descripcion>` | `development` | `development` | `bugfix/BUG-12-fix-upload` |
+| Hotfix | `hotfix/HOT-<id>-<descripcion>` | `main` | `main` + `development` | `hotfix/HOT-01-fix-auth-crash` |
 | Release | `release/<version>` | `development` | `main` + `development` | `release/1.0.0` |
 
 ### Flujo de Trabajo

@@ -263,7 +263,7 @@ database/
 | TM-16 | A08 Software/Data Integrity | Presigned URL re-usada | photos-service | Expiración 5 min (upload) / 15 min (lectura). Idempotency en confirm-upload | MEDIA |
 | TM-17 | A09 Security Logging | Login attempts no auditados | auth-service | LoginAttempt entity con email, IP, timestamp, resultado. Retención 90 días | ALTA |
 | TM-18 | A09 Security Logging | Acciones admin no rastreables | api-gateway | Winston audit log con RequestId, userId, action, timestamp en cada operación | MEDIA |
-| TM-19 | A10 SSRF | Redirect en presigned URL | photos-service | Presigned URLs no aceptan redirects. Validar host del endpoint S3 | BAJA |
+| TM-19 | A10 SSRF | Redirect en presigned URL | photos-service | Endpoint S3 fijo en configuración (env var), nunca derivado de input de usuario. Presigned URLs no aceptan redirects | BAJA |
 | TM-20 | Content Protection | Descarga directa de imagen original | photos-service | NUNCA exponer originalKey. Solo servir optimizedKey/thumbnailKey via presigned URL | CRÍTICA |
 | TM-21 | Content Protection | Captura de pantalla | frontend | Canvas overlay con watermark dinámico. CSS user-select:none. No es infalible (documentado) | MEDIA |
 

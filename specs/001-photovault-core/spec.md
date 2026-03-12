@@ -46,7 +46,7 @@ A photographer wants to upload their photos to the platform with confidence that
 6. **Given** any user viewing a protected photo in a browser, **When** they right-click on the image, **Then** the context menu is suppressed or does not offer "Save Image As".
 7. **Given** any user viewing a protected photo, **When** they attempt to drag the image, **Then** the drag action is blocked.
 8. **Given** any user viewing a protected photo, **When** they view the page source or inspect elements, **Then** the original image URL is not exposed — only a time-limited signed URL to an optimized (lower quality) version is used.
-9. **Given** any user viewing a protected photo, **When** they attempt a screenshot, **Then** a visible overlay/watermark is rendered on top of the image via a client-side canvas layer, degrading the quality of any capture.
+9. **Given** any user viewing a protected photo, **Then** a visible overlay/watermark is always rendered on top of the image via a client-side canvas layer, degrading the quality of any potential screenshot (preventive measure — browsers do not provide screenshot detection APIs).
 10. **Given** a photographer, **When** they upload a file that is not an image or exceeds the size limit, **Then** they see a clear error message and the upload is rejected.
 
 ---

@@ -97,7 +97,7 @@
 | name | varchar(100) | NOT NULL | |
 | description | text | NULL, max 500 chars | |
 | visibility | enum | NOT NULL, DEFAULT 'private' | 'public', 'private' |
-| coverPhotoId | UUID | FK → Photo, NULL | |
+| coverPhotoId | UUID | FK → Photo, NULL, ON DELETE SET NULL | Se resetea si la foto cover es eliminada |
 | isFeatured | boolean | NOT NULL, DEFAULT false | |
 | position | integer | NOT NULL, DEFAULT 0 | Orden en portafolio |
 | createdAt | timestamp | NOT NULL, DEFAULT now() | |
