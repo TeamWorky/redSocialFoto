@@ -1,7 +1,8 @@
 # Análisis Arquitectónico: PhotoVault Core
 
 **Branch**: `001-photovault-core` | **Fecha**: 2026-03-12
-**Propósito**: Resolver gaps arquitectónicos identificados antes de implementar
+**Propósito**: Análisis detallado de decisiones D-11 a D-21 (diagramas, configuraciones, flujos)
+**Log maestro**: Ver [research.md](research.md) para el índice completo de decisiones D-01 a D-21
 
 ---
 

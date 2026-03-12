@@ -4,6 +4,8 @@
 
 ## Decision Log
 
+> **Nota**: Este archivo es el log maestro de todas las decisiones arquitectónicas (D-01 a D-21). Para análisis detallado de D-11 a D-21 (diagramas, tablas de configuración, flujos), ver [architecture-analysis.md](architecture-analysis.md).
+
 ### D-01: Frontend Framework
 
 - **Decision**: Angular 21 con Standalone Components
@@ -169,3 +171,19 @@
 - **Rationale**: Rate limiting distribuido por IP + usuario autenticado. Redis comparte contadores entre instancias del gateway. Login: 5/min por email+IP. API: 100/min por usuario, 30/min anónimo. Upload URL: 20/5min.
 - **Alternatives considered**:
   - express-rate-limit: No distribuido sin adapter Redis. Menos integrado con NestJS.
+
+### D-20: API Versioning
+
+- **Decision**: URI versioning (`/api/v1/`) + deprecation headers
+- **Rationale**: Versionado en la URI es el más explícito y fácil de documentar. Solo v1 para MVP. Cuando se necesite v2: nuevo path, v1 sigue con header `Deprecation: true` y deadline mínimo 6 meses.
+- **Alternatives considered**:
+  - Header versioning: Menos visible, más difícil de debuggear.
+  - Query parameter: No estándar, problemas de cache.
+
+### D-21: Backup & Recovery
+
+- **Decision**: PostgreSQL pg_dump diario a S3 + S3 versioning habilitado
+- **Rationale**: RPO 24h para PostgreSQL (pg_dump diario), RPO 0 para S3 (versionado nativo). Redis no requiere backup (datos efímeros: cache, sesiones, colas). No implementar en MVP local, solo documentar para producción.
+- **Alternatives considered**:
+  - WAL archiving + PITR: Mayor complejidad operacional, innecesario para MVP.
+  - Velero (K8s): Solo aplica si se usa Kubernetes.

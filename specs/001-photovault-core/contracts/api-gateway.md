@@ -25,6 +25,9 @@ Register a new photographer account.
   "id": "uuid",
   "email": "string",
   "displayName": "string",
+  "username": "string | null",
+  "accessToken": "string (JWT, 15 min)",
+  "refreshToken": "string (7 days)",
   "message": "Verification email sent"
 }
 ```

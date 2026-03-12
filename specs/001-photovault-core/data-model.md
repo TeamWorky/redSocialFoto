@@ -84,6 +84,8 @@
 
 **Índices**: photographerId, visibility, tags (GIN), shareToken (unique), createdAt DESC
 
+**Regla de visibilidad en álbumes**: Cuando una foto con `visibility: 'link_only'` se agrega a un álbum `public`, la foto NO es visible en la vista pública del álbum. Solo es accesible via su `shareToken` directo. Aplica la restricción más estricta (la de la foto individual prevalece sobre la del álbum).
+
 ---
 
 ### Album (photos-service)

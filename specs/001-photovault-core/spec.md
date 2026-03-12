@@ -111,7 +111,7 @@ A photographer wants to manage their uploaded photos: view, edit metadata (title
 
 - What happens when a photographer uploads a photo with the same filename as an existing one? → The system assigns a unique identifier; filenames do not conflict.
 - What happens when the storage service (S3) is temporarily unavailable? → The system queues the upload and retries automatically up to 3 times, showing the user a "processing" status. After 3 failures, the user is notified with an option to retry manually.
-- What happens when a user's session token expires mid-upload? → The upload fails gracefully with a message to re-authenticate; no partial files are left in storage.
+- What happens when a user's session token expires mid-upload? → With presigned URLs, the PUT to S3 continues (authenticated by the signed URL itself), but the subsequent POST /photos/confirm-upload fails with 401. The orphan file in S3 is cleaned by the hourly cron job (D-11). The frontend handles the 401 by prompting re-authentication and retrying the confirmation call.
 - What happens when a visitor shares a signed URL after it expires? → The URL returns a 403 with a message that the link has expired.
 - What happens when a photographer tries to register with a disposable email? → The system accepts it (no disposable email blocking) but validates format and deliverability via confirmation email.
 - What happens when a photo file is corrupted? → The system validates the file header (magic bytes) during upload and rejects files that do not match their declared MIME type.

@@ -129,10 +129,10 @@ hotfix/*  ──PR──► main
 
 ```markdown
 ## Título
-<tipo>(<alcance>): <descripción concisa>
+<tipo>(<alcance>): <ID> - <descripción concisa>
 
 Tipos: feat, fix, docs, style, refactor, test, chore, hotfix, security
-Ejemplo: feat(photos): add anti-download protection for image viewer
+Ejemplo: feat(photos): F-04 - add anti-download protection for image viewer
 ```
 
 ```markdown
@@ -187,11 +187,11 @@ Link a la spec en `.specify/` que respalda este cambio.
 Formato obligatorio para mensajes de commit:
 
 ```
-<tipo>(<alcance>): <descripción>
+<tipo>(<alcance>): <ID> - <descripción>
 
 [cuerpo opcional]
 
-[footer opcional]
+[footer opcional: Closes #42, Refs T001]
 ```
 
 | Tipo | Uso |
