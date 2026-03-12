@@ -42,7 +42,7 @@
 | socialLinks | jsonb | NULL | Array de {platform, url}, max 5 |
 | oauthProvider | varchar(20) | NULL | 'google', 'apple', NULL |
 | oauthProviderId | varchar(255) | NULL | ID del proveedor OAuth |
-| storagePlanId | UUID | FK → StoragePlan | |
+| storagePlanId | UUID | NOT NULL | Referencia lógica a billing.StoragePlan (sin FK cross-schema, validado a nivel de aplicación) |
 | storageUsedBytes | bigint | NOT NULL, DEFAULT 0 | Calculado, actualizado async |
 | role | enum | NOT NULL, DEFAULT 'photographer' | 'photographer', 'admin' |
 | isActive | boolean | NOT NULL, DEFAULT true | Soft delete |

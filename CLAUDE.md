@@ -36,6 +36,7 @@ docker compose up -d             # Start PostgreSQL + Redis + MinIO
 
 # Test
 npm run test                     # Unit tests (Vitest)
+npm run test:integration         # Integration tests (Supertest)
 npm run test:e2e                 # E2E tests (Playwright)
 npm run lint                     # ESLint
 
@@ -48,7 +49,7 @@ npm run migration:revert         # Revert last migration
 
 - TypeScript strict mode, ESLint + Prettier
 - NestJS conventions: modules, controllers, services, DTOs with class-validator
-- Conventional Commits: feat/fix/docs/refactor/test/chore
+- Conventional Commits: feat/fix/docs/style/refactor/test/chore/hotfix/security
 
 ## Recent Changes
 

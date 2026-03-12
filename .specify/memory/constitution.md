@@ -108,8 +108,10 @@ El desarrollo cumple con los controles relevantes de ISO 27001:2022 (Anexo A).
 ### Flujo de Trabajo
 
 ```
-feature/* ──PR──► development ──PR (release)──► main
+feature/* ──PR──► development
 bugfix/*  ──PR──► development
+release/* ──PR──► main
+   └─────PR──► development
 hotfix/*  ──PR──► main
    └─────PR──► development
 ```
@@ -129,7 +131,7 @@ hotfix/*  ──PR──► main
 ## Título
 <tipo>(<alcance>): <descripción concisa>
 
-Tipos: feat, fix, docs, style, refactor, test, chore, hotfix
+Tipos: feat, fix, docs, style, refactor, test, chore, hotfix, security
 Ejemplo: feat(photos): add anti-download protection for image viewer
 ```
 

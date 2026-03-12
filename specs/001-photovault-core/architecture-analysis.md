@@ -29,7 +29,8 @@ No estaba definido si los archivos pasan por el API Gateway (proxy) o se suben d
 ┌──────────┐     1. POST /photos/upload-url      ┌──────────────┐
 │ Frontend │ ──────────────────────────────────▶  │ API Gateway  │
 │ (Angular)│                                      │              │
-│          │  ◀── { presignedUrl, photoId, key }  │  → photos-svc│
+│          │  ◀── { uploads: [{ presignedUrl,     │  → photos-svc│
+│          │        photoId, objectKey, expiresIn }] }            │
 │          │                                      └──────────────┘
 │          │     2. PUT file directamente
 │          │ ──────────────────────────────────▶  ┌──────────────┐
